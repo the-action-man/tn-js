@@ -263,10 +263,6 @@ const report = flightReport('BH118', Date.now())
  * @returns {number}
  */
 function calcRegisteredSeats(flight) {
-    let registeredSeats = 0;
-    for (const ticket of flight.tickets)
-        if (ticket.registrationTime)
-            registeredSeats++;
-
-    return registeredSeats;
+    const registeredTickets = flight.tickets.filter(item => item.registrationTime)
+    return registeredTickets.length;
 }
