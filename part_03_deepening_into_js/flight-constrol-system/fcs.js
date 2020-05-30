@@ -250,7 +250,7 @@ function flightReport(flightNumber, nowTime) {
         flight: flightNumber,
         registration: (flight.registrationStarts < nowTime || nowTime < flight.registartionEnds),
         complete: complete,
-        countOfSeats: (flight.seats + flight.businessSeats),
+        countOfSeats: flight.seats + flight.businessSeats,
         reservedSeats: flight.tickets.length,
         registeredSeats: calcRegisteredSeats(flight),
     };
