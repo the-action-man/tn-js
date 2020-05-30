@@ -10,23 +10,15 @@
 // }
 
 function doIt(arr) {
-    let count  = 0;
-    let sum  = 0;
-    for (let i = 0; i <= arr.length; i++) {
-        if (arr[i] < 0) {
-            count++;
-            sum += arr[i]
-        }
-    }
+    const negativeNumbers = arr.filter(number => number < 0);
+    const sum = (accumulator, currentValue) => accumulator + currentValue;
+
     return {
-        count: count,
-        sum: sum,
+        count: negativeNumbers.length,
+        sum: negativeNumbers.reduce(sum),
     };
 }
-
 
 let input = [91, 93, 45, -67, -96, -40, 34, -96, 42, -58];
 let result = doIt(input);
 console.table(result);
-
-
