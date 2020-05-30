@@ -23,10 +23,7 @@
 
 function doIt(input) {
     let arr = input.split(" ");
-    let result = [];
-    for (let i = 0; i < arr.length; i++) {
-        result[i] = defineObject(arr[i]);
-    }
+    let result = arr.map(defineObject);
     return result;
 }
 
@@ -35,11 +32,16 @@ function doIt(input) {
  * @returns {ResultItem}
  */
 function defineObject(word) {
-    let sum = 0;
-    for (let i = 0; i < word.length; i++) {
-        sum += word.charCodeAt(i);
-    }
-    return { word: word, sum: sum };
+    const chars = word.split("");
+    const chars_codes = chars.map(function(item) {
+        return item.charCodeAt(0);
+    });
+    const sum = (accumulator, currentValue) => accumulator + currentValue;
+
+    return {
+        word: word,
+        sum: chars_codes.reduce(sum)
+    };
 }
 
 let input = "Lorem ipsum dolor sit amet.";
