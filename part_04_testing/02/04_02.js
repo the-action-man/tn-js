@@ -47,8 +47,8 @@ function wordStat(input) {
         ];
     }
     const singleSpacesInput = removeNonSingleSpaces(input);
-    let arr = singleSpacesInput.split(" ");
-    let result = arr.map(calcSumOfWordCharsCodes);
+    const arr = singleSpacesInput.split(" ");
+    const result = arr.map(calcSumOfWordCharsCodes);
     return result;
 }
 
