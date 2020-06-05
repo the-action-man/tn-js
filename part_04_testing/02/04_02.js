@@ -39,23 +39,37 @@
  * @returns {Array} with hash of word and sum
  */
 function wordStat(input) {
-    if (input === undefined || input == null || input.trim() === "") {
+    if (input === undefined || input == null)
+        throw new Error('Incorrect input!');
+    if (input.trim() === "") {
         return [
             { word: "", sum: 0 }
         ];
     }
-    let arr = input.split(" ");
-    let result = arr.map(defineObject);
+    const singleSpacesInput = removeNonSingleSpaces(input);
+    let arr = singleSpacesInput.split(" ");
+    let result = arr.map(calcSumOfWordCharsCodes);
     return result;
+}
+
+/**
+ * @param {string} text
+ * @returns {string}
+ */
+function removeNonSingleSpaces(text) {
+    while (text.includes("  ")) {
+        text = text.replace("  ", " ");
+    }
+    return text;
 }
 
 /**
  * @param {string} word
  * @returns {ResultItem}
  */
-function defineObject(word) {
+function calcSumOfWordCharsCodes(word) {
     const chars = word.split("");
-    const chars_codes = chars.map(function(item) {
+    const charsCodes = chars.map(function(item) {
         if (item === "")
             return 0;
         return item.charCodeAt(0);
@@ -64,7 +78,7 @@ function defineObject(word) {
 
     return {
         word: word,
-        sum: chars_codes.reduce(sum)
+        sum: charsCodes.reduce(sum)
     };
 }
 

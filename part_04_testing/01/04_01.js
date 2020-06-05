@@ -30,11 +30,8 @@
 function sumOfPositive(arr) {
     const positiveNumbers = arr.filter(number => number > 0);
     const count = positiveNumbers.length;
-    let sum = 0;
-    if (count > 0) {
-        const sumFunc = (accumulator, currentValue) => accumulator + currentValue;
-        sum = positiveNumbers.reduce(sumFunc);
-    }
+    const sumFunc = (accumulator, currentValue) => accumulator + currentValue;
+    const sum = positiveNumbers.reduce(sumFunc, 0);
 
     return {
         count: count,
