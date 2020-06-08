@@ -30,12 +30,12 @@ function showElement(node, depth) {
  * @param {number} depth
  */
 function defineIndent(depth) {
-    return Array(depth).fill(' ').join('')
+    return Array(depth).fill('  ').join('')
 }
 
 showElementsHierarchy();
 
-
+console.info("=======================");
 
 //========= case 2 (Nodes) ===========
 
@@ -48,13 +48,12 @@ function showNodesHierarchy() {
  * @param {number} depth
  */
 function showNode(node, depth) {
-    console.info(defineIndent(depth) + node.tagName);
-    if (node.childNodes !== undefined) {
-        for (let childNode of node.children) {
-            showElement(childNode, depth + 1)
+    console.info(defineIndent(depth) + node.nodeName);
+    if (node.hasChildNodes()) {
+        for (let childNode of node.childNodes) {
+            showNode(childNode, depth + 1)
         }
     }
 }
 
-// showNodesHierarchy();
-
+showNodesHierarchy();
