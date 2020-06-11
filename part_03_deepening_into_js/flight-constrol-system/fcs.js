@@ -256,7 +256,7 @@ function flightReport(flightNumber, nowTime) {
     };
 }
 // How to use flightReport
-const report = flightReport('BH118', Date.now())
+const report = flightReport('BH118', Date.now());
 
 /**
  * @param {Flight} flight
@@ -266,3 +266,34 @@ function calcRegisteredSeats(flight) {
     const registeredTickets = flight.tickets.filter(item => item.registrationTime)
     return registeredTickets.length;
 }
+
+/**
+ * Part 05. Обязательное задание 02.
+ * 2. Реализовать функцию flightDetails(flightName)
+ * которая принимает объект рейса и будет выводить
+ * в контейнер <div id=”flight-details”></div> отчет по рейсу
+ * и отображать список купленных билетов:
+ * номер билета, место, полное имя пассажира,
+ * прошел ли регистрацию на рейс.
+ *
+ * @param {string} flightName
+ */
+function flightDetails(flightName) {
+    const report = flightReport(flightName, Date.now());
+    const flightDetails = document.getElementById("flight-details");
+
+    const h1 = document.createElement('h1');
+    h1.innerText = "Flight Report";
+    flightDetails.append(h1);
+
+    const ul = document.createElement('ul');
+    for (let [key, value] of Object.entries(report)) {
+        const li = document.createElement('li');
+        ul.append(li);
+        li.innerText = `${key}: ${value}`;
+    }
+
+    flightDetails.append(ul);
+}
+// How to use flightDetails
+flightDetails('BH118');
