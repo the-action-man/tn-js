@@ -8,6 +8,7 @@
 
 
 //========= case 1 (Elements) ===========
+console.info("========= Elements ==============");
 
 function showElementsHierarchy() {
     showElement(document.childNodes[1], 0);
@@ -35,9 +36,10 @@ function defineIndent(depth) {
 
 showElementsHierarchy();
 
-console.info("=======================");
+
 
 //========= case 2 (Nodes) ===========
+console.info("========= Nodes ==============");
 
 function showNodesHierarchy() {
     showNode(document.childNodes[1], 0);
@@ -57,3 +59,43 @@ function showNode(node, depth) {
 }
 
 showNodesHierarchy();
+
+
+
+//========= case 2 (Sibling) ===========
+console.info("========== Sibling =============");
+
+function showSiblingHierarchy() {
+    showTheNode(document.childNodes[1], 0);
+}
+
+/**
+ * @param {Node} node
+ * @param {number} depth
+ */
+function showTheNode(node, depth) {
+    printNodeInfo(node, depth);
+    const firstChild = node.firstChild;
+    if (!firstChild) return;
+
+    showTheNode(firstChild, depth + 1)
+
+    let nextSibling = firstChild;
+    while (true) {
+        nextSibling = nextSibling.nextSibling
+        if (!nextSibling) return;
+
+        showTheNode(nextSibling, depth + 1)
+    }
+
+}
+
+/**
+ * @param {Node} node
+ * @param {number} depth
+ */
+function printNodeInfo(node, depth) {
+    console.info(defineIndent(depth) + node.nodeName);
+}
+
+showSiblingHierarchy();
