@@ -256,7 +256,7 @@ function flightReport(flightNumber, nowTime) {
     };
 }
 // How to use flightReport
-const report = flightReport('BH118', Date.now());
+// const report = flightReport('BH118', Date.now());
 
 /**
  * @param {Flight} flight
@@ -295,11 +295,13 @@ function flightDetails(flightName) {
 
     flightDetails.append(ul);
 
+    const div = document.createElement('div');
     const h2 = document.createElement('h2');
     h2.innerText = "Tickets:";
-    flightDetails.append(h2);
+    div.append(h2);
 
-    ticketsDetails(flightName, flightDetails);
+    ticketsDetails(flightName, div);
+    flightDetails.append(div);
 }
 
 /**
@@ -315,18 +317,35 @@ function ticketsDetails(flightName, flightDetails) {
     if (!flight)
         throw new Error('Flight not found');
     const tickets = flight.tickets;
+    const div = document.createElement('div');
 
     for (const ticket of tickets) {
-        const ul = document.createElement('ul');
-        for (let [key, value] of Object.entries(ticket)) {
-            const li = document.createElement('li');
-            ul.append(li);
-            li.innerText = `${key}: ${value}`;
-        }
-        const hr = document.createElement('hr');
-        flightDetails.append(hr);
-        flightDetails.append(ul);
+        ticketDetails(ticket, div);
     }
+
+    flightDetails.append(div);
+}
+
+/**
+* @param {Ticket} ticket
+* @param {Element} flightDetails
+*/
+function ticketDetails(ticket, flightDetails) {
+    const h3 = document.createElement('h3');
+    h3.innerText = "Ticket ID: " + ticket.id;
+    flightDetails.append(h3);
+
+    const seatElement = document.createElement('p');
+    seatElement.innerText = "seat: " + ticket.seat;
+    flightDetails.append(seatElement);
+
+    const passengerName = document.createElement('p');
+    passengerName.innerText = "Passenger name: " + ticket.fullName;
+    flightDetails.append(passengerName);
+
+    const registrationState = document.createElement('p');
+    registrationState.innerText = "Registration state: " + (ticket.registrationTime != null);
+    flightDetails.append(registrationState);
 }
 
 // How to use flightDetails
