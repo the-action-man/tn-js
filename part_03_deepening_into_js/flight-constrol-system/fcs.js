@@ -15,8 +15,8 @@ let flights = {
         name: 'BH118',
         seats: 28,
         businessSeats: 4,
-        registrationStarts: makeTime(1, 0),
-        registartionEnds: makeTime(6, 0),
+        registrationStarts: makeTime(21, 0),
+        registartionEnds: makeTime(23, 0),
         tickets: [
             {
                 id: 'BH118-B50',
@@ -156,7 +156,7 @@ function displayFlights() {
     console.table(flights);
 }
 
-function flightDetails(flightName) {
+function flightDetailsToConsole(flightName) {
     console.log(`*** Details of flight ${flightName} ***`);
     const flight = flights[flightName];
     if (!flight) {
@@ -294,6 +294,40 @@ function flightDetails(flightName) {
     }
 
     flightDetails.append(ul);
+
+    const h2 = document.createElement('h2');
+    h2.innerText = "Tickets:";
+    flightDetails.append(h2);
+
+    ticketsDetails(flightName, flightDetails);
 }
+
+/**
+ * отображать список купленных билетов:
+ * номер билета, место, полное имя пассажира,
+ * прошел ли регистрацию на рейс.
+ *
+ * @param {string} flightName
+ * @param {Element} flightDetails
+ */
+function ticketsDetails(flightName, flightDetails) {
+    const flight = flights[flightName];
+    if (!flight)
+        throw new Error('Flight not found');
+    const tickets = flight.tickets;
+
+    for (const ticket of tickets) {
+        const ul = document.createElement('ul');
+        for (let [key, value] of Object.entries(ticket)) {
+            const li = document.createElement('li');
+            ul.append(li);
+            li.innerText = `${key}: ${value}`;
+        }
+        const hr = document.createElement('hr');
+        flightDetails.append(hr);
+        flightDetails.append(ul);
+    }
+}
+
 // How to use flightDetails
 flightDetails('BH118');
