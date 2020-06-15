@@ -15,8 +15,8 @@ let flights = {
         name: 'BH118',
         seats: 28,
         businessSeats: 4,
-        registrationStarts: makeTime(1, 0),
-        registartionEnds: makeTime(6, 0),
+        registrationStarts: makeTime(21, 0),
+        registartionEnds: makeTime(23, 0),
         tickets: [
             {
                 id: 'BH118-B50',
@@ -156,7 +156,7 @@ function displayFlights() {
     console.table(flights);
 }
 
-function flightDetails(flightName) {
+function flightDetailsToConsole(flightName) {
     console.log(`*** Details of flight ${flightName} ***`);
     const flight = flights[flightName];
     if (!flight) {
@@ -256,7 +256,7 @@ function flightReport(flightNumber, nowTime) {
     };
 }
 // How to use flightReport
-const report = flightReport('BH118', Date.now())
+// const report = flightReport('BH118', Date.now());
 
 /**
  * @param {Flight} flight
@@ -266,3 +266,87 @@ function calcRegisteredSeats(flight) {
     const registeredTickets = flight.tickets.filter(item => item.registrationTime)
     return registeredTickets.length;
 }
+
+/**
+ * Part 05. Обязательное задание 02.
+ * 2. Реализовать функцию flightDetails(flightName)
+ * которая принимает объект рейса и будет выводить
+ * в контейнер <div id=”flight-details”></div> отчет по рейсу
+ * и отображать список купленных билетов:
+ * номер билета, место, полное имя пассажира,
+ * прошел ли регистрацию на рейс.
+ *
+ * @param {string} flightName
+ */
+function flightDetails(flightName) {
+    const report = flightReport(flightName, Date.now());
+    const flightDetails = document.getElementById("flight-details");
+
+    const h1 = document.createElement('h1');
+    h1.innerText = "Flight Report";
+    flightDetails.append(h1);
+
+    const ul = document.createElement('ul');
+    for (let [key, value] of Object.entries(report)) {
+        const li = document.createElement('li');
+        ul.append(li);
+        li.innerText = `${key}: ${value}`;
+    }
+
+    flightDetails.append(ul);
+
+    const div = document.createElement('div');
+    const h2 = document.createElement('h2');
+    h2.innerText = "Tickets:";
+    div.append(h2);
+
+    ticketsDetails(flightName, div);
+    flightDetails.append(div);
+}
+
+/**
+ * отображать список купленных билетов:
+ * номер билета, место, полное имя пассажира,
+ * прошел ли регистрацию на рейс.
+ *
+ * @param {string} flightName
+ * @param {Element} flightDetails
+ */
+function ticketsDetails(flightName, flightDetails) {
+    const flight = flights[flightName];
+    if (!flight)
+        throw new Error('Flight not found');
+    const tickets = flight.tickets;
+    const div = document.createElement('div');
+
+    for (const ticket of tickets) {
+        ticketDetails(ticket, div);
+    }
+
+    flightDetails.append(div);
+}
+
+/**
+* @param {Ticket} ticket
+* @param {Element} flightDetails
+*/
+function ticketDetails(ticket, flightDetails) {
+    const h3 = document.createElement('h3');
+    h3.innerText = "Ticket ID: " + ticket.id;
+    flightDetails.append(h3);
+
+    const seatElement = document.createElement('p');
+    seatElement.innerText = "seat: " + ticket.seat;
+    flightDetails.append(seatElement);
+
+    const passengerName = document.createElement('p');
+    passengerName.innerText = "Passenger name: " + ticket.fullName;
+    flightDetails.append(passengerName);
+
+    const registrationState = document.createElement('p');
+    registrationState.innerText = "Registration state: " + (ticket.registrationTime != null);
+    flightDetails.append(registrationState);
+}
+
+// How to use flightDetails
+flightDetails('BH118');
