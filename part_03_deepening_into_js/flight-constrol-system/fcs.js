@@ -16,7 +16,7 @@ let flights = {
         seats: 28,
         businessSeats: 4,
         registrationStarts: makeTime(21, 0),
-        registartionEnds: makeTime(23, 0),
+        registartionEnds: makeTime(24, 0),
         tickets: [
             {
                 id: 'BH118-B50',
@@ -60,7 +60,7 @@ function findAvailableSeat(flight, type) {
     let seatsOfType = 0;
 
     switch (type) {
-        case 0: // standart
+        case 0: // standard
             const availableSeats = [];
 
             for (let i = flight.businessSeats + 1; i <= flight.seats; i++)
@@ -87,7 +87,7 @@ function findAvailableSeat(flight, type) {
 
             return seat;
         default:
-            throw new Error(`Unknown type`)
+            throw new Error(`Unknown seat type. Available seat types: 0-standard | 1-business `)
     }
 }
 
@@ -147,8 +147,8 @@ function buyTicket(flightName, buyTime, fullName, type = 0) {
     };
 }
 
-const a = buyTicket('BH118', makeTime(5, 10), 'Petrov I. I.');
-console.log(a);
+// const a = buyTicket('BH118', makeTime(5, 10), 'Petrov I. I.');
+// console.log(a);
 
 
 function displayFlights() {
@@ -349,4 +349,38 @@ function ticketDetails(ticket, flightDetails) {
 }
 
 // How to use flightDetails
-flightDetails('BH118');
+// flightDetails('BH118');
+
+
+// 2. Реализовать форму покупки билетов на самолет.
+//    -   Форма должна собирать необходимую информацию
+// и вызывать функцию buyTicket.
+//    -   В случае ошибки показать текст ошибки
+//    -   В случае успеха показать купленное место
+//    -   Также после успешной покупки билета требуется очистить поля формы,
+// чтобы было удобно покупать новый билет
+
+const form = document.getElementById('ticket-purchase-form');
+form.addEventListener('submit', submitHandlerOfTicketBuying);
+
+function submitHandlerOfTicketBuying(event) {
+    // прерываем всплытие что бы форма не отправлялась
+    event.preventDefault();
+
+    const formData = {
+        flightName: form.elements.flightName.value,
+        fullName: form.elements.fullname.value,
+        seatType: parseInt(form.elements.seatType.value, 10),
+    };
+
+    try {
+        const ticket = buyTicket(formData.flightName, Date.now(), formData.fullName, formData.seatType);
+        alert('You successfully buy ticket. Seat number: ' + ticket.seat);
+        form.reset();
+    } catch (error) {
+        console.error(error);
+        alert(error.message);
+    }
+
+    updateView();
+}
