@@ -361,9 +361,9 @@ function ticketDetails(ticket, flightDetails) {
 // чтобы было удобно покупать новый билет
 
 const form = document.getElementById('ticket-purchase-form');
-form.addEventListener('submit', submitHandlerOfTicketBuying);
+form.addEventListener('submit', handleTicketBuyingForm);
 
-function submitHandlerOfTicketBuying(event) {
+function handleTicketBuyingForm(event) {
     // прерываем всплытие что бы форма не отправлялась
     event.preventDefault();
 
