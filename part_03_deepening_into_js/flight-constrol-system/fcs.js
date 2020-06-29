@@ -375,12 +375,19 @@ function handleTicketBuyingForm(event) {
 
     try {
         const ticket = buyTicket(formData.flightName, Date.now(), formData.fullName, formData.seatType);
-        alert('You successfully buy ticket. Seat number: ' + ticket.seat);
+        showFlash('You successfully buy ticket. Seat number: ' + ticket.seat);
         form.reset();
     } catch (error) {
-        console.error(error);
-        alert(error.message);
+        showFlash(error.message)
     }
 
     updateView();
+}
+
+/**
+ * @param {String} message
+ */
+function showFlash(message) {
+    const flash = document.getElementById("flash-container");
+    flash.innerText = message;
 }
