@@ -21,7 +21,7 @@
 
 <body>
     <p>Палитра</p>
-    <table class="palette" cellspacing="0" cellpadding="0">
+    <table id="palette" class="palette" cellspacing="0" cellpadding="0">
         <tr>
             <td style="background-color: black;"></td>
             <td style="background-color: chocolate;"></td>
@@ -34,7 +34,7 @@
         </tr>
     </table>
     <p>Холст</p>
-    <table class="canvas" cellspacing="0" cellpadding="0">
+    <table id="canvas" class="canvas" cellspacing="0" cellpadding="0">
         <tr>
             <td data-code="hello"></td>
             <td data-code="world"></td>
@@ -75,8 +75,8 @@
     <script>
         'use strict';
 
-        const palette = document.getElementsByTagName("table")[0];
-        const canvas = document.getElementsByTagName("table")[1];
+        const palette = document.getElementById("palette");
+        const canvas = document.getElementById("canvas");
 
         palette.addEventListener('click', clickOnPalette);
         canvas.addEventListener('click', clickOnCanvas);
