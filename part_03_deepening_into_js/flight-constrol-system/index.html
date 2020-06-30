@@ -4,8 +4,42 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Flight Control System</title>
+        <style>
+            input {
+                width: 200px;
+            }
+
+            .flash-container {
+                background-color: gray;
+            }
+        </style>
     </head>
     <body>
+        <div id="ticket-purchase-block">
+            <div id='flash-container' class='flash-container'></div>
+            <h2>Ticket Purchase</h2>
+            <form id="ticket-purchase-form">
+                <div>
+                    <label for="flightName">Flight name:</label>
+                    <input id="flightName" name="flightName" placeholder="Please enter flight number">
+                </div>
+                <div>
+                    <label for="fullname">Full name:</label>
+                    <input id="fullname" name="fullname" placeholder="Please enter your full name">
+                </div>
+                <div>
+                    <label for="seatType">Seat type:</label>
+                    <select id="seatType" name="seatType">
+                        <option value="0" selected>Standard</option>
+                        <option value="1">Business</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Buy</button>
+                </div>
+            </form>
+        </div>
+
         <div id="flight-details"></div>
         <script src="fcs.js"></script>
     </body>

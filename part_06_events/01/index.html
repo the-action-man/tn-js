@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>events</title>
+    <style>
+        table {
+            display: block;
+            margin: 20px auto;
+            max-width: 200px;
+        }
+
+        table tr td {
+            width: 10px;
+            height: 10px;
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Палитра</p>
+    <table id="palette" class="palette" cellspacing="0" cellpadding="0">
+        <tr>
+            <td style="background-color: black;"></td>
+            <td style="background-color: chocolate;"></td>
+            <td style="background-color: yellow;"></td>
+            <td style="background-color: green;"></td>
+            <td style="background-color: red;"></td>
+            <td style="background-color: blue;"></td>
+            <td style="background-color: violet;"></td>
+            <td style="background-color: white;"></td>
+        </tr>
+    </table>
+    <p>Холст</p>
+    <table id="canvas" class="canvas" cellspacing="0" cellpadding="0">
+        <tr>
+            <td data-code="hello"></td>
+            <td data-code="world"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <script>
+        'use strict';
+
+        const palette = document.getElementById("palette");
+        const canvas = document.getElementById("canvas");
+
+        palette.addEventListener('click', clickOnPalette);
+        canvas.addEventListener('click', clickOnCanvas);
+
+        let selectedColor = "transparent";
+
+        /**
+         * @param {MouseEvent} event
+         */
+        function clickOnCanvas(event) {
+            console.log(event.type, event.target);
+
+            if (event.target.tagName !== 'TD')
+                return;
+
+            console.log("selectedColor: " + selectedColor)
+            event.target.style.backgroundColor = selectedColor;
+            console.log("Set color: " + event.target.style.backgroundColor)
+        }
+
+        /**
+         * @param {MouseEvent} event
+         */
+        function clickOnPalette(event) {
+            console.log(event.type, event.target);
+
+            if (event.target.tagName !== 'TD')
+                return;
+
+            selectedColor = event.target.style.backgroundColor
+            console.log("selectedColor: " + selectedColor)
+        }
+    </script>
+</body>
+
+</html>
