@@ -1,5 +1,14 @@
 'use strict';
 
+/**
+ * @typedef {Object} Ship
+ * @property {string} name
+ * @property {string} model
+ * @property {number} position
+ * @property {number} speed
+ * @property {string} color
+ */
+
 function Ship(name, model, xPosition, yPosition) {
     let _isAnchorDropped = false;
     this.name = name;
@@ -54,7 +63,7 @@ function Ship(name, model, xPosition, yPosition) {
             return false;
         }
         this._distance = this._distance + this._calcDistance(x, y);
-        this._position = { x: x, y: y };
+        this._position = { x, y };
         return true;
     };
 
