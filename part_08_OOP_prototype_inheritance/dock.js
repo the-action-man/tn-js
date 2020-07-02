@@ -32,3 +32,5 @@ function Dock(name, xPosition, yPosition) {
         this.ships[ship[name]] = undefined;
     }
 }
+
+MotorDock.prototype = new Dock();

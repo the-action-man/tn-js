@@ -7,6 +7,7 @@ function Ship(name, model, xPosition, yPosition) {
     this._position = { x: xPosition, y: yPosition };
     this._distance = 0;
     this.speed = 0;
+    this.color = "white";
 
     /**
      * @param {string} direction (‘n’, ‘w’, ‘s’, ‘e’)
