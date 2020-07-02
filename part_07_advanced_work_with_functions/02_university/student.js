@@ -8,7 +8,7 @@ function Student(fullName) {
     this.firstName = arr[1];
     this.middleName = arr[2];
     this.lastName = arr[0];
-    this.healthy = true;
+    this._healthy = true;
 
     /**
      * @return {string} ФИО одной строкой
@@ -28,6 +28,6 @@ function Student(fullName) {
      * @return {boolean} узнать, здоров ли студент сейчас
      */
     this.isHealthy = () => {
-        return this.healthy;
+        return this._healthy;
     }
 }

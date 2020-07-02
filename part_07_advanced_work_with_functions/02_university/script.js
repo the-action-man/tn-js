@@ -6,7 +6,7 @@ console.log(student1);
 const student2 = new Student('Ф_2 И_2 О_2');
 console.log(student2);
 const student3 = new Student('Ф_3 И_3 О_3');
-student3.healthy = false;
+student3._healthy = false;
 console.log(student3);
 
 

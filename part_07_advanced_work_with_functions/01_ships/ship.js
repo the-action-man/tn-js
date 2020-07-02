@@ -53,7 +53,7 @@ function Ship(name, model, xPosition, yPosition) {
             return false;
         }
         this._distance = this._distance + this._calcDistance(x, y);
-        this._position = { x: x, y: y };
+        this._position = { x, y };
         return true;
     };
 
