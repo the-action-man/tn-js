@@ -4,19 +4,19 @@
  * @typedef {Object} Ship
  * @property {string} name
  * @property {string} model
- * @property {number} position
- * @property {number} speed
+ * @property {number} xPosition
+ * @property {number} yPosition
  * @property {string} color
  */
 
-function Ship(name, model, xPosition, yPosition) {
+function Ship(name, model, xPosition, yPosition, color) {
     let _isAnchorDropped = false;
     this.name = name;
     this.model = model;
     this._position = { x: xPosition, y: yPosition };
     this._distance = 0;
     this.speed = 0;
-    this.color = "white";
+    this.color = color;
 
     /**
      * @param {string} direction (‘n’, ‘w’, ‘s’, ‘e’)
@@ -108,3 +108,37 @@ function Ship(name, model, xPosition, yPosition) {
         return true;
     };
 }
+
+/**
+ * @param {string} name
+ * @param {number} xPosition
+ * @param {number} yPosition
+ * @param {string} color
+ * @param {number} motorPower
+ * @param {string} hullMaterial
+ * @constructor
+ */
+const MotorShip = function(name, xPosition, yPosition,
+                           color, motorPower, hullMaterial) {
+    Ship.call(this, name, "motor ship", xPosition, yPosition, color)
+    this.motorPower = motorPower;
+    this.hullMaterial = hullMaterial;
+}
+MotorShip.prototype = new Ship();
+
+/**
+ * @param {string} name
+ * @param {number} xPosition
+ * @param {number} yPosition
+ * @param {string} color
+ * @param {string} mastsQuantity
+ * @param {number} sailArea
+ * @constructor
+ */
+const SailingShip = function(name, xPosition, yPosition,
+                             color, mastsQuantity, sailArea) {
+    Ship.call(this, name, "sailing ship", xPosition, yPosition, color)
+    this.mastsQuantity = mastsQuantity;
+    this.sailArea = sailArea;
+}
+SailingShip.prototype = new Ship();

@@ -44,4 +44,27 @@ function Dock(name, xPosition, yPosition) {
     }
 }
 
-// MotorDock.prototype = new Dock();
+/**
+ *
+ * @param {string} name
+ * @param {number} xPosition
+ * @param {number} yPosition
+ * @constructor
+ */
+function MotorDock(name, xPosition, yPosition) {
+    Dock.call(this, name, xPosition, yPosition);
+    this._shipClass = MotorShip;
+
+    this.buildMotorShip = (name, color, motorPower, hullMaterial) => {
+        const ship = new MotorShip(name, this._position.x, this._position.y,
+            color, motorPower, hullMaterial);
+        this.ships[ship.name] = ship;
+        return ship;
+    }
+}
+MotorDock.prototype = new Dock();
+
+// TODO SailingDock
+// TODO SailingDock
+// TODO SailingDock
+// TODO SailingDock

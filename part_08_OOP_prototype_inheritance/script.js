@@ -2,10 +2,9 @@
 
 console.info("===--- Dock ---===");
 console.info("=== Dock ===");
-// const dock = new Dock('dock_01', 100,100);
-const motorDock = new MotorDock();
-
-
+const motorDock = new MotorDock("mDock_01", 0, 0);
+const motorShip = motorDock.buildMotorShip("mShip_01", "white", 11, "plastic")
+console.log(motorShip);
 
 
 
