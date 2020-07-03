@@ -107,6 +107,10 @@ function Ship(name, model, xPosition, yPosition, color) {
         _isAnchorDropped = false;
         return true;
     };
+
+    this.isNewShip = () => {
+        return this._distance === 0;
+    }
 }
 
 /**
@@ -131,7 +135,7 @@ MotorShip.prototype = new Ship();
  * @param {number} xPosition
  * @param {number} yPosition
  * @param {string} color
- * @param {string} mastsQuantity
+ * @param {number} mastsQuantity
  * @param {number} sailArea
  * @constructor
  */
