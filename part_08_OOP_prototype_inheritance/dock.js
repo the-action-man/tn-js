@@ -81,9 +81,9 @@ function Dock(name, xPosition, yPosition) {
      */
     this.exchangeForANewShip = function (oldShip) {
         if (oldShip instanceof this._shipClass) {
-            for (let ship of this.ships) {
-                if (ship.isNewShip()) {
-                    return ship;
+            for (let shipName of Object.keys(this.ships) ) {
+                if (this.ships[shipName].isNewShip()) {
+                    return this.ships[shipName];
                 }
             }
             console.log('This dock does not have appropriate new ships');
